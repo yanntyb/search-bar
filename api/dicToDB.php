@@ -22,7 +22,18 @@ $manager = new DicManager();
 
 $lastInserted = getWordIndex($manager->getLastInserted()["mot"], $_SESSION["dic"]);
 
-echo $manager->insertToDB($_SESSION["dic"][$lastInserted + 1]);
+if($lastInserted === count($_SESSION["dic"])){
+    echo json_encode(["mot" => "Insertion fini"]);
+}
+else{
+    echo json_encode([
+            "mot" => $manager->insertToDB($_SESSION["dic"][$lastInserted + 1]),
+            "stat" => $lastInserted . " / " . count($_SESSION["dic"])
+        ]
+    );
+}
+
+
 
 
 function getWordIndex(string $word, array $dic): int{
