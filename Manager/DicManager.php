@@ -9,7 +9,7 @@ class DicManager
     use ManagerTrait;
 
     public function getLastInserted(){
-        $conn = $this->db->prepare("SELECT * FROM mots ORDER BY ID DESC LIMIT 1");
+        $conn = $this->db->prepare("SELECT * FROM mots ORDER BY id DESC LIMIT 1");
         $conn->execute();
         return $conn->fetch();
     }
@@ -45,5 +45,16 @@ class DicManager
     public function createTable(): bool{
         $conn = $this->db->prepare("CREATE TABLE IF NOT EXISTS mots (id INTEGER PRIMARY KEY AUTOINCREMENT, mot VARCHAR( 255 ))");
         return $conn->execute();
+    }
+
+    public function wordMatch(string $word): array{
+        $conn = $this->db->prepare("SELECT mot FROM mots WHERE mot LIKE :word ORDER BY id ASC LIMIT 10");
+        $conn->bindValue(':word', $word . "%");
+        $conn->execute();
+        $result = [];
+        foreach($conn->fetchAll() as $word){
+            $result[] = $word;
+        }
+        return $result;
     }
 }
