@@ -48,7 +48,7 @@ class DicManager
     }
 
     public function wordMatch(string $word): array{
-        $conn = $this->db->prepare("SELECT mot FROM mots WHERE mot LIKE :word ORDER BY id ASC LIMIT 10");
+        $conn = $this->db->prepare("SELECT mot FROM mots WHERE mot LIKE :word ORDER BY id ASC LIMIT 5");
         $conn->bindValue(':word', $word . "%");
         $conn->execute();
         $result = [];

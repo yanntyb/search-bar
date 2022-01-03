@@ -21,6 +21,10 @@
                 </div>
                 <div id="deleteLabel" class="bg-black fc-white p-04">clear</div>
             </div>
+            <div id="result">
+                <table id="result-table">
+                </table>
+            </div>
         </div>
         <div class="sub">
 

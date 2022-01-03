@@ -26,7 +26,7 @@ function match(string $word, DicManager $manager): array{
     $return = [];
     foreach($manager->wordMatch($word) as $wordMatched){
         $return[] = [
-            "word" => $wordMatched
+            "word" => $wordMatched["mot"]
         ];
     }
     return $return;
